@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -6,8 +7,46 @@ import { MapPin, Mail, Instagram, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      toast({ title: "Please fill all fields", variant: "destructive" });
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      toast({ title: "Please enter a valid email", variant: "destructive" });
+      return;
+    }
+
+    setSending(true);
+
+    const text = `Hi Reelcraft! 👋\n\nName: ${trimmedName}\nEmail: ${trimmedEmail}\n\nMessage:\n${trimmedMessage}`;
+    const whatsappUrl = `https://wa.me/918595661134?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+    toast({ title: "Opening WhatsApp! 💬", description: "Your message is pre-filled and ready to send." });
+
+    setName("");
+    setEmail("");
+    setMessage("");
+    setSending(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />
@@ -71,11 +110,14 @@ const Contact = () => {
 
           <div>
             <h2 className="text-xl font-display font-semibold mb-6">Send a Message</h2>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <Input placeholder="Your Name" />
-              <Input placeholder="Your Email" type="email" />
-              <Textarea placeholder="Your Message" rows={5} />
-              <Button className="w-full bg-gradient-primary text-primary-foreground">Send Message</Button>
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <Input placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} maxLength={100} />
+              <Input placeholder="Your Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={255} />
+              <Textarea placeholder="Your Message" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} maxLength={1000} />
+              <Button type="submit" disabled={sending} className="w-full bg-gradient-primary text-primary-foreground">
+                Send via WhatsApp 💬
+              </Button>
+              <p className="text-xs text-muted-foreground text-center">Opens WhatsApp with your message pre-filled</p>
             </form>
           </div>
         </div>

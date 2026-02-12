@@ -4,6 +4,8 @@ import { HeroSection } from "@/components/HeroSection";
 import { MarqueeStrip } from "@/components/MarqueeStrip";
 import { ProductGrid } from "@/components/ProductGrid";
 import { OffersSection } from "@/components/OffersSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { TrustBadges } from "@/components/TrustBadges";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -13,11 +15,13 @@ const Index = () => {
       <Header />
       <main className="flex-1">
         <HeroSection />
+        <TrustBadges />
         <MarqueeStrip />
         <div className="container">
           <ProductGrid title="Our Collection ✨" limit={8} />
         </div>
         <OffersSection />
+        <TestimonialsSection />
       </main>
       <Footer />
     </div>
