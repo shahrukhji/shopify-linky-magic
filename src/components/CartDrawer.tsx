@@ -114,51 +114,22 @@ export const CartDrawer = () => {
                 </div>
               </div>
 
-              {/* Cart summary */}
-              <div className="flex-shrink-0 space-y-3 pt-4 border-t">
-                <div className="space-y-1.5 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Subtotal</span>
-                    <span>₹{subtotal.toFixed(0)}</span>
-                  </div>
-                  {rewards.discount > 0 && (
-                    <div className="flex justify-between text-green-600">
-                      <span>Milestone Discount</span>
-                      <span>-₹{rewards.discount}</span>
-                    </div>
-                  )}
-                  {onlineBonus > 0 && (
-                    <div className="flex justify-between text-green-600/70">
-                      <span className="text-xs">Online Payment Bonus (5%)</span>
-                      <span className="text-xs">-₹{onlineBonus} <span className="text-muted-foreground">(at checkout)</span></span>
-                    </div>
-                  )}
-                  {rewards.freeGift && (
-                    <div className="flex justify-between text-accent">
-                      <span>Jewelry Box</span>
-                      <span>FREE 🎁 <span className="line-through text-muted-foreground text-xs">₹499</span></span>
-                    </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Shipping</span>
-                    {rewards.freeShipping ? (
-                      <span className="text-green-600">FREE 🚚 <span className="line-through text-muted-foreground text-xs">₹79</span></span>
-                    ) : (
-                      <span>₹{SHIPPING_COST}</span>
-                    )}
-                  </div>
-                  <div className="border-t pt-2 flex justify-between items-center">
-                    <span className="text-lg font-semibold font-display">Total</span>
-                    <span className="text-xl font-bold">₹{finalTotal.toFixed(0)}</span>
-                  </div>
-                  {totalSavings > 0 && (
-                    <p className="text-center text-green-600 font-bold text-sm">You're saving ₹{totalSavings}! 🎉</p>
-                  )}
-                </div>
-                <Button onClick={handleCheckout} className="w-full bg-gradient-primary text-primary-foreground" size="lg" disabled={items.length === 0 || isLoading || isSyncing}>
-                  {isLoading || isSyncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ExternalLink className="w-4 h-4 mr-2" />Checkout</>}
-                </Button>
-              </div>
+               {/* Cart summary */}
+               <div className="flex-shrink-0 space-y-3 pt-4 border-t">
+                 <div className="space-y-1.5 text-sm">
+                   <div className="flex justify-between">
+                     <span className="text-muted-foreground">Subtotal</span>
+                     <span>₹{subtotal.toFixed(0)}</span>
+                   </div>
+                   <div className="border-t pt-2 flex justify-between items-center">
+                     <span className="text-lg font-semibold font-display">Total</span>
+                     <span className="text-xl font-bold">₹{finalTotal.toFixed(0)}</span>
+                   </div>
+                 </div>
+                 <Button onClick={handleCheckout} className="w-full bg-gradient-primary text-primary-foreground" size="lg" disabled={items.length === 0 || isLoading || isSyncing}>
+                   {isLoading || isSyncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ExternalLink className="w-4 h-4 mr-2" />Checkout</>}
+                 </Button>
+               </div>
             </>
           )}
         </div>
