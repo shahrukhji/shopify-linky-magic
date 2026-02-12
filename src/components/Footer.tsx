@@ -49,11 +49,11 @@ export const Footer = () => {
             <div className="space-y-3 text-sm opacity-80">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 flex-shrink-0" />
-                <span>Delhi, India</span>
+                <span>Mange Ram Park, Budh Vihar, Delhi 110086</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <span>hello@reelcraft.store</span>
+                <span>Reelcraft.store@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <Instagram className="h-4 w-4 flex-shrink-0" />

@@ -2,7 +2,7 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RewardsProgressBar } from "@/components/RewardsProgressBar";
-import { MapPin, Mail, Instagram, MessageCircle } from "lucide-react";
+import { MapPin, Mail, Instagram, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,7 +27,16 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium text-sm">Address</p>
-                  <p className="text-sm text-muted-foreground">Delhi, India</p>
+                  <p className="text-sm text-muted-foreground">Mange Ram Park, Budh Vihar, Delhi 110086</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Phone className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="font-medium text-sm">Mobile</p>
+                  <a href="tel:+918595661134" className="text-sm text-muted-foreground hover:text-primary transition-colors">+91 8595661134</a>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -36,7 +45,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium text-sm">Email</p>
-                  <p className="text-sm text-muted-foreground">hello@reelcraft.store</p>
+                  <a href="mailto:Reelcraft.store@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">Reelcraft.store@gmail.com</a>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -45,7 +54,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium text-sm">WhatsApp</p>
-                  <p className="text-sm text-muted-foreground">Chat with us!</p>
+                  <a href="https://wa.me/918595661134" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">+91 8595661134</a>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -54,7 +63,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium text-sm">Instagram</p>
-                  <p className="text-sm text-muted-foreground">@reelcraft.store</p>
+                  <a href="https://instagram.com/reelcraft.store" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">@reelcraft.store</a>
                 </div>
               </div>
             </div>
