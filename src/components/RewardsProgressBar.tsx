@@ -117,7 +117,7 @@ export const RewardsProgressBar = ({ compact = false }: RewardsProgressBarProps)
           </div>
 
           {/* Dynamic text */}
-          <p className={`text-center mt-8 md:mt-10 text-xs md:text-sm font-medium text-muted-foreground transition-all duration-300 ${compact ? "mt-7" : ""}`}>
+          <p className={`text-center text-xs md:text-sm font-medium text-muted-foreground transition-all duration-300 ${compact ? "mt-10" : "mt-12 md:mt-14"}`}>
             {progressText}
           </p>
         </div>

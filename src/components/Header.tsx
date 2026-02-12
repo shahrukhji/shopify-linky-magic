@@ -17,6 +17,10 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b">
+      {/* Free shipping banner */}
+      <div className="bg-primary/10 text-center py-1.5 text-xs font-medium text-primary border-b border-primary/10">
+        🚚 Add items worth ₹499 &amp; get <span className="font-bold">FREE Shipping + ₹50 OFF!</span>
+      </div>
       <div className="container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">
           <span className="text-2xl font-display font-bold text-primary">Reelcraft.store</span>
