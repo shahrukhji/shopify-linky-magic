@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Quote, MapPin, Phone, Mail, ShoppingBag } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 /* ─── scroll-triggered fade-in hook ─── */
 const useScrollReveal = () => {
@@ -99,6 +100,28 @@ const WhyCard = ({ icon, title, text, delay }: { icon: string; title: string; te
 );
 
 const About = () => {
+  useSEO({
+    title: "About Reelcraft.store - Jewelry from Delhi",
+    description: "Meet Shahrukh, founder of Reelcraft.store. 7+ years in jewelry, handpicking trendy designs from Delhi. Direct from source, zero markups.",
+    keywords: "reelcraft.store, handmade jewelry, Delhi jewelry shop, artificial earrings",
+    url: "https://reelcraft.store/about",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Reelcraft.store",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mange Ram Park, Budh Vihar",
+        "addressLocality": "Delhi",
+        "postalCode": "110086",
+        "addressCountry": "IN"
+      },
+      "telephone": "+91-8595661134",
+      "url": "https://reelcraft.store",
+      "image": "https://reelcraft.store/logo.png"
+    }
+  });
+
   return (
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />

@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useSEO } from "@/hooks/useSEO";
 
 const faqs = [
   { q: "Do you offer Cash on Delivery?", a: "Yes! COD is available across India. But pay online to get an extra 5% OFF! 💳" },
@@ -16,6 +17,24 @@ const faqs = [
 ];
 
 const FAQ = () => {
+  useSEO({
+    title: "FAQs - Reelcraft.store",
+    description: "Common questions about jhumkas, shipping, returns, quality, and rewards at Reelcraft.store. Get answers to everything!",
+    keywords: "faq, frequently asked questions, jhumka questions, jewelry help",
+    url: "https://reelcraft.store/faq",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    }
+  });
   return (
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />

@@ -5,8 +5,15 @@ import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 const TrackOrder = () => {
+  useSEO({
+    title: "Track Your Order",
+    description: "Track your Reelcraft.store order status in real-time. Enter your order ID or tracking number.",
+    keywords: "track order, order tracking, delivery status",
+    url: "https://reelcraft.store/track-order"
+  });
   return (
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />

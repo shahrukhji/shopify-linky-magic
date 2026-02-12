@@ -9,6 +9,7 @@ import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Loader2, ArrowLeft, Truck, Gift, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
+import { useSEO } from "@/hooks/useSEO";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -18,6 +19,33 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const isLoading = useCartStore(state => state.isLoading);
+
+  // SEO
+  useSEO({
+    title: product?.title || "Product Details",
+    description: product?.description?.substring(0, 155) || "Shop this beautiful jhumka at Reelcraft.store",
+    keywords: `${product?.title || "jhumka"}, earrings, jewelry, buy online`,
+    url: `https://reelcraft.store/product/${handle}`,
+    type: "product",
+    image: product?.images?.edges?.[0]?.node?.url,
+    schema: product ? {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.title,
+      "description": product.description,
+      "image": product.images.edges.map((img: any) => img.node.url),
+      "brand": {
+        "@type": "Brand",
+        "name": "Reelcraft.store"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": `https://reelcraft.store/product/${handle}`,
+        "priceCurrency": "INR",
+        "price": product.variants.edges[0]?.node?.price?.amount || "0"
+      }
+    } : undefined
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {

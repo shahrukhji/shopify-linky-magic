@@ -3,8 +3,16 @@ import { Header } from "@/components/Header";
 import { ProductGrid } from "@/components/ProductGrid";
 import { Footer } from "@/components/Footer";
 import { RewardsProgressBar } from "@/components/RewardsProgressBar";
+import { useSEO } from "@/hooks/useSEO";
 
 const Shop = () => {
+  useSEO({
+    title: "Shop All Jhumkas & Earrings Online",
+    description: "Browse 2000+ handpicked jhumkas & artificial earrings. Free shipping on ₹499+. Quality checked. 7-day easy returns.",
+    keywords: "buy jhumkas online, earrings for women, artificial jewelry, fashion earrings",
+    url: "https://reelcraft.store/shop",
+    type: "website"
+  });
   return (
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />
