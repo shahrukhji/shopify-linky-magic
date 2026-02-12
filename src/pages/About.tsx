@@ -1,6 +1,7 @@
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { MapPin, Heart, Sparkles, Users } from "lucide-react";
 
 const About = () => {
@@ -8,14 +9,15 @@ const About = () => {
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />
       <Header />
+      <RewardsProgressBar />
       <main className="flex-1">
         <section className="container py-16 max-w-3xl mx-auto">
-          <h1 className="text-4xl font-display font-bold text-center mb-3">About JhumkaWali 💕</h1>
+          <h1 className="text-4xl font-display font-bold text-center mb-3">About Reelcraft.store 💕</h1>
           <p className="text-muted-foreground text-center mb-12">Our story, from the heart of Delhi to your doorstep</p>
 
           <div className="prose max-w-none space-y-6 text-muted-foreground leading-relaxed">
             <p>
-              Welcome to <strong className="text-foreground">JhumkaWali!</strong> We are a small business based in Delhi, India, with a deep love for jhumkas and traditional Indian jewelry.
+              Welcome to <strong className="text-foreground">Reelcraft.store!</strong> We are a small business based in Delhi, India, with a deep love for jhumkas and traditional Indian jewelry.
             </p>
             <p>
               Every piece in our collection is hand-picked from the famous local markets of Delhi — <strong className="text-foreground">Sadar Bazaar, Sarojini Nagar, and Chandni Chowk</strong> — ensuring you get the most trending designs at the most affordable prices.
