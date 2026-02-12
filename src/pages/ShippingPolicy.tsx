@@ -2,8 +2,15 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RewardsProgressBar } from "@/components/RewardsProgressBar";
+import { useSEO } from "@/hooks/useSEO";
 
 const ShippingPolicy = () => {
+  useSEO({
+    title: "Shipping & Return Policy",
+    description: "Learn about Reelcraft.store's free shipping on ₹499+, 7-day easy returns, and delivery times across India.",
+    keywords: "shipping policy, return policy, free shipping, delivery, returns",
+    url: "https://reelcraft.store/shipping-policy"
+  });
   return (
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />

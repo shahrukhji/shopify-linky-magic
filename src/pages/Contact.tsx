@@ -8,8 +8,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useSEO } from "@/hooks/useSEO";
 
 const Contact = () => {
+  useSEO({
+    title: "Contact Us - Reelcraft.store",
+    description: "Have questions? Contact Reelcraft.store via WhatsApp, email, or phone. We're here to help!",
+    keywords: "contact reelcraft, customer support, jewelry help",
+    url: "https://reelcraft.store/contact"
+  });
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
