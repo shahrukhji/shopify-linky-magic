@@ -1,7 +1,8 @@
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { MapPin, Mail, Phone, Instagram, MessageCircle } from "lucide-react";
+import { RewardsProgressBar } from "@/components/RewardsProgressBar";
+import { MapPin, Mail, Instagram, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,6 +12,7 @@ const Contact = () => {
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />
       <Header />
+      <RewardsProgressBar />
       <main className="flex-1 container py-16">
         <h1 className="text-4xl font-display font-bold text-center mb-3">Contact Us 💬</h1>
         <p className="text-muted-foreground text-center mb-12">We'd love to hear from you!</p>
@@ -34,7 +36,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium text-sm">Email</p>
-                  <p className="text-sm text-muted-foreground">hello@jhumkawali.com</p>
+                  <p className="text-sm text-muted-foreground">hello@reelcraft.store</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -52,7 +54,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium text-sm">Instagram</p>
-                  <p className="text-sm text-muted-foreground">@jhumkawali</p>
+                  <p className="text-sm text-muted-foreground">@reelcraft.store</p>
                 </div>
               </div>
             </div>

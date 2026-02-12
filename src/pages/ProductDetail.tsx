@@ -5,6 +5,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Loader2, ArrowLeft, Truck, Gift, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
@@ -85,6 +86,7 @@ const ProductDetail = () => {
     <div className="min-h-screen flex flex-col">
       <AnnouncementBar />
       <Header />
+      <RewardsProgressBar />
       <main className="flex-1 container py-8">
         <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft className="h-4 w-4" /> Back to Shop
@@ -158,12 +160,17 @@ const ProductDetail = () => {
               {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ShoppingCart className="w-4 h-4 mr-2" />Add to Cart</>}
             </Button>
 
+            {/* Mini rewards info */}
+            <div className="mt-4 p-3 rounded-lg bg-muted/50 text-xs text-muted-foreground leading-relaxed">
+              🚚 ₹499+ → Free Ship + ₹50 OFF | 💰 ₹999+ → ₹100 OFF | 🎁 ₹1499+ → Free Jewelry Box | 💳 Online Pay → Extra 5% OFF
+            </div>
+
             <p className="text-sm text-muted-foreground mt-6 leading-relaxed">{product.description}</p>
 
             <div className="mt-6 space-y-3 border-t pt-6">
               <div className="flex items-center gap-3 text-sm">
                 <Truck className="h-4 w-4 text-primary" />
-                <span>Free shipping on orders above ₹999</span>
+                <span>Free shipping on orders above ₹499</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Gift className="h-4 w-4 text-primary" />

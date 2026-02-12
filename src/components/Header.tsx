@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Search, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useState } from "react";
@@ -19,7 +19,7 @@ export const Header = () => {
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b">
       <div className="container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-display font-bold text-primary">JhumkaWali</span>
+          <span className="text-2xl font-display font-bold text-primary">Reelcraft.store</span>
           <span className="text-gold text-lg">✦</span>
         </Link>
 

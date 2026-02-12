@@ -4,12 +4,19 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { RewardsProgressBar } from "@/components/RewardsProgressBar";
+import { calculateRewards, calculateOnlineBonus, SHIPPING_COST } from "@/lib/cartRewards";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  const rewards = calculateRewards(subtotal);
+  const afterDiscount = subtotal - rewards.discount;
+  const onlineBonus = calculateOnlineBonus(afterDiscount);
+  const finalTotal = afterDiscount + rewards.shippingCost;
+  const totalSavings = rewards.discount + (rewards.freeShipping ? SHIPPING_COST : 0) + (rewards.freeGift ? 499 : 0);
 
   useEffect(() => { if (isOpen) syncCart(); }, [isOpen, syncCart]);
 
@@ -40,7 +47,15 @@ export const CartDrawer = () => {
             {totalItems === 0 ? "Your cart is empty" : `${totalItems} item${totalItems !== 1 ? 's' : ''} in your cart`}
           </SheetDescription>
         </SheetHeader>
-        <div className="flex flex-col flex-1 pt-6 min-h-0">
+
+        {/* Progress bar inside cart */}
+        {items.length > 0 && (
+          <div className="flex-shrink-0 border-b pb-3">
+            <RewardsProgressBar compact />
+          </div>
+        )}
+
+        <div className="flex flex-col flex-1 pt-4 min-h-0">
           {items.length === 0 ? (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
@@ -81,12 +96,66 @@ export const CartDrawer = () => {
                       </div>
                     </div>
                   ))}
+
+                  {/* Free gift display */}
+                  {rewards.freeGift && (
+                    <div className="flex gap-4 p-3 rounded-lg bg-accent/10 border border-accent/30">
+                      <div className="w-16 h-16 bg-accent/20 rounded-md flex items-center justify-center flex-shrink-0">
+                        <span className="text-2xl">🎁</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h4 className="font-medium text-sm">FREE Premium Jewelry Carry Box</h4>
+                          <Badge className="bg-accent text-accent-foreground text-[10px] px-1.5 py-0">FREE GIFT</Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Worth ₹499 — Yours FREE! 🎉</p>
+                        <p className="font-semibold text-sm mt-1 text-green-600">₹0 <span className="line-through text-muted-foreground font-normal">₹499</span></p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="flex-shrink-0 space-y-4 pt-4 border-t">
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold font-display">Total</span>
-                  <span className="text-xl font-bold">₹{totalPrice.toFixed(0)}</span>
+
+              {/* Cart summary */}
+              <div className="flex-shrink-0 space-y-3 pt-4 border-t">
+                <div className="space-y-1.5 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Subtotal</span>
+                    <span>₹{subtotal.toFixed(0)}</span>
+                  </div>
+                  {rewards.discount > 0 && (
+                    <div className="flex justify-between text-green-600">
+                      <span>Milestone Discount</span>
+                      <span>-₹{rewards.discount}</span>
+                    </div>
+                  )}
+                  {onlineBonus > 0 && (
+                    <div className="flex justify-between text-green-600/70">
+                      <span className="text-xs">Online Payment Bonus (5%)</span>
+                      <span className="text-xs">-₹{onlineBonus} <span className="text-muted-foreground">(at checkout)</span></span>
+                    </div>
+                  )}
+                  {rewards.freeGift && (
+                    <div className="flex justify-between text-accent">
+                      <span>Jewelry Box</span>
+                      <span>FREE 🎁 <span className="line-through text-muted-foreground text-xs">₹499</span></span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Shipping</span>
+                    {rewards.freeShipping ? (
+                      <span className="text-green-600">FREE 🚚 <span className="line-through text-muted-foreground text-xs">₹79</span></span>
+                    ) : (
+                      <span>₹{SHIPPING_COST}</span>
+                    )}
+                  </div>
+                  <div className="border-t pt-2 flex justify-between items-center">
+                    <span className="text-lg font-semibold font-display">Total</span>
+                    <span className="text-xl font-bold">₹{finalTotal.toFixed(0)}</span>
+                  </div>
+                  {totalSavings > 0 && (
+                    <p className="text-center text-green-600 font-bold text-sm">You're saving ₹{totalSavings}! 🎉</p>
+                  )}
                 </div>
                 <Button onClick={handleCheckout} className="w-full bg-gradient-primary text-primary-foreground" size="lg" disabled={items.length === 0 || isLoading || isSyncing}>
                   {isLoading || isSyncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ExternalLink className="w-4 h-4 mr-2" />Checkout</>}
