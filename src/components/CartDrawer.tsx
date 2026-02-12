@@ -49,11 +49,9 @@ export const CartDrawer = () => {
         </SheetHeader>
 
         {/* Progress bar inside cart */}
-        {items.length > 0 && (
-          <div className="flex-shrink-0 border-b pb-3">
-            <RewardsProgressBar compact />
-          </div>
-        )}
+        <div className="flex-shrink-0 border-b pb-3">
+          <RewardsProgressBar compact />
+        </div>
 
         <div className="flex flex-col flex-1 pt-4 min-h-0">
           {items.length === 0 ? (
