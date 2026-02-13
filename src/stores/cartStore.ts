@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { storefrontApiRequest, type ShopifyProduct } from '@/lib/shopify';
+import { storefrontApiRequest, SHOPIFY_STORE_PERMANENT_DOMAIN, type ShopifyProduct } from '@/lib/shopify';
 
 export interface CartItem {
   lineId: string | null;
@@ -64,6 +64,9 @@ const CART_LINES_REMOVE_MUTATION = `
 function formatCheckoutUrl(checkoutUrl: string): string {
   try {
     const url = new URL(checkoutUrl);
+    // Always use the .myshopify.com domain for checkout, since the custom domain
+    // points to our Lovable app, not Shopify's checkout servers
+    url.hostname = SHOPIFY_STORE_PERMANENT_DOMAIN;
     url.searchParams.set('channel', 'online_store');
     return url.toString();
   } catch {
