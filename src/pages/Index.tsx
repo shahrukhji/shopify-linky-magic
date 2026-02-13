@@ -6,6 +6,7 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { OffersSection } from "@/components/OffersSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { TrustBadges } from "@/components/TrustBadges";
+import { CategoriesSection } from "@/components/CategoriesSection";
 import { Footer } from "@/components/Footer";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -38,6 +39,7 @@ const Index = () => {
         <HeroSection />
         <TrustBadges />
         <MarqueeStrip />
+        <CategoriesSection />
         <div className="container">
           <ProductGrid title="Our Collection ✨" limit={8} />
         </div>
