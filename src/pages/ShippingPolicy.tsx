@@ -26,20 +26,21 @@ const ShippingPolicy = () => {
               <li>We ship to all pincodes across India</li>
               <li><strong className="text-foreground">Free shipping</strong> on orders above ₹499</li>
               <li>Shipping charge of ₹79 for orders below ₹499</li>
-              <li>Delivery time: 4-7 business days (Delhi NCR: 2-3 days)</li>
-              <li>Cash on Delivery available</li>
-              <li>All orders are shipped from Delhi with love 💕</li>
+              <li>Delivery time: 7–10 business days across India (Delhi NCR: 2–3 days)</li>
+              <li>Cash on Delivery (COD) available</li>
+              <li>All orders are carefully packed and shipped from Delhi with love 💕</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-xl font-display font-semibold text-foreground mb-3">↩️ Return Policy</h2>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-3">↩️ Return & Exchange Policy</h2>
             <ul className="space-y-2 list-disc pl-5">
-              <li>7-day easy return policy from the date of delivery</li>
-              <li>Product must be unused, unworn, and in original packaging with tags</li>
-              <li>We'll arrange a pickup from your address</li>
-              <li>Refund will be processed within 5-7 business days after receiving the product</li>
-              <li>Exchange is also available for a different design or size</li>
+              <li><strong className="text-foreground">No returns after acceptance</strong> — please inspect your order at the time of delivery</li>
+              <li>If you do not wish to accept the order, you may <strong className="text-foreground">refuse delivery</strong> on the spot</li>
+              <li>Returns are only accepted for <strong className="text-foreground">damaged, defective, or wrong products</strong></li>
+              <li>Report any issues within 48 hours of delivery with photos/videos as proof</li>
+              <li>Replacement will be processed within 5–7 business days after verification</li>
+              <li>Change-of-mind returns are <strong className="text-foreground">not applicable</strong> once the order is accepted</li>
             </ul>
           </section>
 
