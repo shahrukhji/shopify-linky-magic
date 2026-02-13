@@ -29,8 +29,8 @@ export function calculateRewards(subtotal: number): CartRewards {
   return { discount: 0, freeShipping: false, freeGift: false, shippingCost: SHIPPING_COST, unlockedMilestones: 0 };
 }
 
-export function calculateOnlineBonus(discountedTotal: number): number {
-  return Math.round(discountedTotal * 0.05);
+export function calculateOnlineBonus(_discountedTotal: number): number {
+  return 0;
 }
 
 export function getProgressText(subtotal: number): string {

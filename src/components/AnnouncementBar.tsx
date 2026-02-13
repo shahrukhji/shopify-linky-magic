@@ -4,7 +4,7 @@ const messages = [
   { icon: <Truck className="h-3.5 w-3.5" />, text: "🚚 FREE Shipping + ₹50 OFF on ₹499+" },
   { icon: <Tag className="h-3.5 w-3.5" />, text: "💰 Flat ₹100 OFF on ₹999+" },
   { icon: <Gift className="h-3.5 w-3.5" />, text: "🎁 FREE Jewelry Box worth ₹499 on ₹1,499+" },
-  { icon: <CreditCard className="h-3.5 w-3.5" />, text: "💳 Pay Online for Extra 5% OFF!" },
+  
   { icon: <Sparkles className="h-3.5 w-3.5" />, text: "✨ Unlock 3 Reward Milestones — Buy More Save More!" },
 ];
 

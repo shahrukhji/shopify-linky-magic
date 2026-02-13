@@ -4,7 +4,7 @@ const offers = [
   { icon: <Truck className="h-6 w-6" />, title: "Free Shipping + ₹50 OFF", desc: "On all orders above ₹499" },
   { icon: <Tag className="h-6 w-6" />, title: "₹100 OFF on ₹999+", desc: "Flat ₹100 discount on bigger orders!" },
   { icon: <Gift className="h-6 w-6" />, title: "Free Jewelry Box", desc: "Orders above ₹1499 get a FREE carry box worth ₹499!" },
-  { icon: <CreditCard className="h-6 w-6" />, title: "Extra 5% OFF Online", desc: "Pay online & save an extra 5% instantly!" },
+  
   { icon: <ShieldCheck className="h-6 w-6" />, title: "Quality Checked", desc: "Every piece handpicked & quality verified" },
   { icon: <RotateCcw className="h-6 w-6" />, title: "Easy Returns", desc: "7-day hassle-free return policy" },
 ];
