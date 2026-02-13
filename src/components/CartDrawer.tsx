@@ -136,12 +136,6 @@ export const CartDrawer = () => {
                        <span>₹{SHIPPING_COST}</span>
                      )}
                    </div>
-                   {onlineBonus > 0 && (
-                     <div className="flex justify-between text-green-600">
-                       <span>Online Payment Bonus (5%)</span>
-                       <span>-₹{onlineBonus}</span>
-                     </div>
-                   )}
                    {totalSavings > 0 && (
                      <div className="flex justify-between text-green-600 font-medium border-t border-dashed pt-1.5">
                        <span>Total Savings</span>
