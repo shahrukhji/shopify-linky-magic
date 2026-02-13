@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { useSEO } from "@/hooks/useSEO";
 
-const categoryMeta: Record<string, { title: string; description: string }> = {
+const categoryMeta: Record<string, { title: string; description: string; query?: string }> = {
   small: {
     title: "Small Earrings – Delicate & Everyday Wear",
     description: "Shop delicate small jhumkas & earrings perfect for daily wear. Lightweight, elegant designs starting at ₹199.",
@@ -18,6 +18,11 @@ const categoryMeta: Record<string, { title: string; description: string }> = {
   large: {
     title: "Large Earrings – Bold Statement Pieces",
     description: "Shop bold, large statement jhumkas & earrings. Eye-catching designs for weddings and festive occasions.",
+  },
+  "jewellery-box": {
+    title: "Jewellery Box – Travel Cases & Organisers",
+    description: "Shop premium jewellery travel cases & organisers. Keep your precious collection safe and stylish.",
+    query: "product_type:Jewellery Box",
   },
 };
 
@@ -45,7 +50,7 @@ const ShopCategory = () => {
           <h1 className="text-4xl font-display font-bold text-center">{displayTitle}</h1>
           <p className="text-muted-foreground text-center mt-2">{meta.description}</p>
         </div>
-        <ProductGrid limit={40} query={category} />
+        <ProductGrid limit={40} query={meta.query || category} />
       </main>
       <Footer />
     </div>

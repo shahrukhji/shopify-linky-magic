@@ -17,6 +17,12 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
+
+  // Reset image selection when variant changes
+  const handleVariantChange = (idx: number) => {
+    setSelectedVariantIdx(idx);
+    setSelectedImage(0);
+  };
   const addItem = useCartStore(state => state.addItem);
   const isLoading = useCartStore(state => state.isLoading);
 
@@ -107,8 +113,16 @@ const ProductDetail = () => {
     );
   }
 
-  const images = product.images.edges;
+  const allImages = product.images.edges;
   const selectedVariant = product.variants.edges[selectedVariantIdx]?.node;
+
+  // Filter images by selected color if the product has a Color option
+  const selectedColor = selectedVariant?.selectedOptions?.find((o: any) => o.name === "Color")?.value?.toLowerCase();
+  const images = selectedColor
+    ? allImages.filter((img: any) => img.node.altText?.toLowerCase().includes(selectedColor)) 
+    : allImages;
+  // Fallback to all images if no color-specific images found
+  const displayImages = images.length > 0 ? images : allImages;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -124,17 +138,17 @@ const ProductDetail = () => {
           {/* Images */}
           <div>
             <div className="aspect-square rounded-xl overflow-hidden bg-secondary mb-4">
-              {images[selectedImage]?.node && (
+              {displayImages[selectedImage]?.node && (
                 <img
-                  src={images[selectedImage].node.url}
-                  alt={images[selectedImage].node.altText || product.title}
+                  src={displayImages[selectedImage].node.url}
+                  alt={displayImages[selectedImage].node.altText || product.title}
                   className="w-full h-full object-cover"
                 />
               )}
             </div>
-            {images.length > 1 && (
+            {displayImages.length > 1 && (
               <div className="flex gap-2 overflow-x-auto">
-                {images.map((img: any, i: number) => (
+                {displayImages.map((img: any, i: number) => (
                   <button
                     key={i}
                     onClick={() => setSelectedImage(i)}
@@ -167,7 +181,7 @@ const ProductDetail = () => {
                           key={vi}
                           variant={vi === selectedVariantIdx ? "default" : "outline"}
                           size="sm"
-                          onClick={() => setSelectedVariantIdx(vi)}
+                          onClick={() => handleVariantChange(vi)}
                           className={vi === selectedVariantIdx ? "bg-gradient-primary text-primary-foreground" : ""}
                         >
                           {opt?.value || v.node.title}

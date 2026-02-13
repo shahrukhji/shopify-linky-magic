@@ -22,6 +22,13 @@ const categories = [
     query: "large",
     gradient: "from-secondary to-primary/10",
   },
+  {
+    title: "Jewellery Box",
+    description: "Travel cases & organisers",
+    emoji: "💎",
+    query: "jewellery box",
+    gradient: "from-primary/10 to-secondary",
+  },
 ];
 
 export const CategoriesSection = () => {
@@ -34,7 +41,7 @@ export const CategoriesSection = () => {
           {categories.map((cat) => (
             <Link
               key={cat.query}
-              to={`/shop/${cat.query}`}
+              to={`/shop/${cat.query === 'jewellery box' ? 'jewellery-box' : cat.query}`}
               className={`group relative rounded-xl border bg-gradient-to-br ${cat.gradient} p-8 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}
             >
               <span className="text-5xl block mb-4">{cat.emoji}</span>
