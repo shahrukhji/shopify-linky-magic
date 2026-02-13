@@ -6,7 +6,7 @@ export const MILESTONES = [
 ];
 
 export const MAX_THRESHOLD = 1499;
-export const SHIPPING_COST = 79;
+export const SHIPPING_COST = 75;
 
 export interface CartRewards {
   discount: number;
