@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { storefrontApiRequest, SHOPIFY_STORE_PERMANENT_DOMAIN, type ShopifyProduct } from '@/lib/shopify';
+import { getDiscountCodeForSubtotal } from '@/lib/cartRewards';
 
 export interface CartItem {
   lineId: string | null;
@@ -23,6 +24,7 @@ interface CartStore {
   removeItem: (variantId: string) => Promise<void>;
   clearCart: () => void;
   syncCart: () => Promise<void>;
+  applyDiscountCode: () => Promise<void>;
   getCheckoutUrl: () => string | null;
 }
 
@@ -58,6 +60,15 @@ const CART_LINES_UPDATE_MUTATION = `
 const CART_LINES_REMOVE_MUTATION = `
   mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) { cart { id } userErrors { field message } }
+  }
+`;
+
+const CART_DISCOUNT_CODES_UPDATE_MUTATION = `
+  mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
+    cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+      cart { id checkoutUrl }
+      userErrors { field message }
+    }
   }
 `;
 
@@ -186,6 +197,25 @@ export const useCartStore = create<CartStore>()(
 
       clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
       getCheckoutUrl: () => get().checkoutUrl,
+
+      applyDiscountCode: async () => {
+        const { cartId, items } = get();
+        if (!cartId) return;
+        const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+        const code = getDiscountCodeForSubtotal(subtotal);
+        try {
+          const data = await storefrontApiRequest(CART_DISCOUNT_CODES_UPDATE_MUTATION, {
+            cartId,
+            discountCodes: code ? [code] : [],
+          });
+          const cart = data?.data?.cartDiscountCodesUpdate?.cart;
+          if (cart?.checkoutUrl) {
+            set({ checkoutUrl: formatCheckoutUrl(cart.checkoutUrl) });
+          }
+        } catch (error) {
+          console.error('Failed to apply discount code:', error);
+        }
+      },
 
       syncCart: async () => {
         const { cartId, isSyncing, clearCart } = get();
