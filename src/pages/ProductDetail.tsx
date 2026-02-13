@@ -7,7 +7,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RewardsProgressBar } from "@/components/RewardsProgressBar";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Loader2, ArrowLeft, Truck, Gift, RotateCcw } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Truck, Gift, RotateCcw, Banknote } from "lucide-react";
+import { CODOrderForm } from "@/components/CODOrderForm";
 import { toast } from "sonner";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -17,6 +18,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [codFormOpen, setCodFormOpen] = useState(false);
 
   // Reset image selection when variant changes
   const handleVariantChange = (idx: number) => {
@@ -193,19 +195,40 @@ const ProductDetail = () => {
               )
             ))}
 
-            <Button
-              size="lg"
-              className="w-full bg-gradient-primary text-primary-foreground mt-4 font-semibold"
-              onClick={handleAddToCart}
-              disabled={isLoading || !selectedVariant?.availableForSale}
-            >
-              {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ShoppingCart className="w-4 h-4 mr-2" />Add to Cart</>}
-            </Button>
+            <div className="flex gap-2 mt-4">
+              <Button
+                size="lg"
+                className="flex-1 bg-gradient-primary text-primary-foreground font-semibold"
+                onClick={handleAddToCart}
+                disabled={isLoading || !selectedVariant?.availableForSale}
+              >
+                {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ShoppingCart className="w-4 h-4 mr-2" />Add to Cart</>}
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold"
+                onClick={() => setCodFormOpen(true)}
+                disabled={!selectedVariant?.availableForSale}
+              >
+                <Banknote className="w-4 h-4 mr-2" />Buy Now (COD)
+              </Button>
+            </div>
 
             {/* Mini rewards info */}
             <div className="mt-4 p-3 rounded-lg bg-muted/50 text-xs text-muted-foreground leading-relaxed">
-              🚚 ₹499+ → Free Ship + ₹50 OFF | 💰 ₹999+ → ₹100 OFF | 🎁 ₹1499+ → Free Jewelry Box | 💳 Online Pay → Extra 5% OFF
+              🚚 ₹499+ → Free Ship + ₹50 OFF | 💰 ₹999+ → ₹100 OFF | 🎁 ₹1499+ → Free Jewelry Box
             </div>
+
+            {/* COD Order Form */}
+            {product && selectedVariant && (
+              <CODOrderForm
+                open={codFormOpen}
+                onOpenChange={setCodFormOpen}
+                product={product}
+                selectedVariant={selectedVariant}
+              />
+            )}
 
             <p className="text-sm text-muted-foreground mt-6 leading-relaxed">{product.description}</p>
 
