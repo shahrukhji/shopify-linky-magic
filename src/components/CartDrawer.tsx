@@ -121,6 +121,32 @@ export const CartDrawer = () => {
                      <span className="text-muted-foreground">Subtotal</span>
                      <span>₹{subtotal.toFixed(0)}</span>
                    </div>
+                   {rewards.discount > 0 && (
+                     <div className="flex justify-between text-green-600">
+                       <span>Discount</span>
+                       <span>-₹{rewards.discount}</span>
+                     </div>
+                   )}
+                   <div className="flex justify-between">
+                     <span className="text-muted-foreground">Delivery Fee</span>
+                     {rewards.freeShipping ? (
+                       <span className="text-green-600">FREE <span className="line-through text-muted-foreground ml-1">₹{SHIPPING_COST}</span></span>
+                     ) : (
+                       <span>₹{SHIPPING_COST}</span>
+                     )}
+                   </div>
+                   {onlineBonus > 0 && (
+                     <div className="flex justify-between text-green-600">
+                       <span>Online Payment Bonus (5%)</span>
+                       <span>-₹{onlineBonus}</span>
+                     </div>
+                   )}
+                   {totalSavings > 0 && (
+                     <div className="flex justify-between text-green-600 font-medium border-t border-dashed pt-1.5">
+                       <span>Total Savings</span>
+                       <span>₹{totalSavings.toFixed(0)}</span>
+                     </div>
+                   )}
                    <div className="border-t pt-2 flex justify-between items-center">
                      <span className="text-lg font-semibold font-display">Total</span>
                      <span className="text-xl font-bold">₹{finalTotal.toFixed(0)}</span>
