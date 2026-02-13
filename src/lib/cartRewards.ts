@@ -44,3 +44,11 @@ export function getProgressText(subtotal: number): string {
 export function getProgressPercent(subtotal: number): number {
   return Math.min(100, (subtotal / MAX_THRESHOLD) * 100);
 }
+
+// Discount codes matching Shopify price rules
+export function getDiscountCodeForSubtotal(subtotal: number): string | null {
+  if (subtotal >= 1499) return "REEL100GIFT";
+  if (subtotal >= 999) return "REEL100";
+  if (subtotal >= 499) return "REEL50";
+  return null;
+}
